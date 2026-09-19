@@ -1,0 +1,17 @@
+{
+  "name": "8x-skills",
+  "description": "Agent skills for building, publishing, and remixing games on Paean Apps Square (*.clide.app / 8x.gg).",
+  "owner": {
+    "name": "Paean AI",
+    "url": "https://clide.app"
+  },
+  "plugins": [
+    {
+      "name": "paean",
+      "description": "Paean Apps Square skills: paean-publish, paean-remix, paean-sdk (cloud save + leaderboard), paean-zero-setup, and paean-skills-update",
+      "source": "./",
+      "category": "development",
+      "tags": ["paean", "clide", "8x", "games", "publish", "remix", "leaderboard", "cloud-save"]
+    }
+  ]
+}

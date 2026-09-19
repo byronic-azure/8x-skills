@@ -18,6 +18,9 @@ browser reference files (no server, no build) you copy into your app.
 
 ```
 8x-skills/
+├── .claude-plugin/
+│   ├── marketplace.json   Claude Code marketplace manifest (`claude plugin marketplace add paean-ai/8x-skills`)
+│   └── plugin.json        Plugin `paean` — loads its skills from claude-code/
 ├── zero/
 │   ├── paean-skills-update/ SKILL.md
 │   ├── paean-zero-setup/ SKILL.md
@@ -39,10 +42,12 @@ browser reference files (no server, no build) you copy into your app.
 ```
 
 All three variants ship the **same** scripts and reference files; only the `SKILL.md`
-packaging differs. The **zero/** and **claude-code/** variants use YAML frontmatter
-(`name:` + `description:`) for auto-loading — Zero CLI discovers skills from
-`.zero/skills/` / `~/.zero/skills/`, Claude Code from `.claude/skills/` /
-`~/.claude/skills/`. Codex has no skill loader and references the files explicitly.
+packaging differs. The `.claude-plugin/` manifests package the **claude-code/** variant as an
+installable Claude Code plugin (`paean@8x-skills`) — no files are duplicated. The **zero/**
+and **claude-code/** variants use YAML frontmatter (`name:` + `description:`) for
+auto-loading — Zero CLI discovers skills from `.zero/skills/` / `~/.zero/skills/`, Claude Code
+from `.claude/skills/` / `~/.claude/skills/` or the plugin. Codex has no skill loader and
+references the files explicitly.
 
 ## Requirements
 
@@ -98,12 +103,36 @@ explicitly ("use the paean-publish skill").
 
 ### Claude Code
 
-Copy a skill directory into your skills folder (project `.claude/skills/` or global
-`~/.claude/skills/`):
+**Plugin (recommended).** This repo is a Claude Code plugin marketplace, so the skills install
+in two commands and update with one:
+
+```bash
+claude plugin marketplace add paean-ai/8x-skills
+claude plugin install paean@8x-skills
+```
+
+Restart Claude Code to load the plugin. All five skills auto-load and are namespaced under the
+plugin, so you can invoke one explicitly as `/paean:paean-publish` (likewise
+`/paean:paean-remix`, `/paean:paean-sdk`, `/paean:paean-zero-setup`,
+`/paean:paean-skills-update`) or just ask ("publish this game to clide.app"). To pull the
+latest skill changes later:
+
+```bash
+claude plugin marketplace update 8x-skills
+claude plugin update paean@8x-skills
+```
+
+Installing from a fork works the same way — substitute the fork's `owner/8x-skills` in the
+`marketplace add` command. Check what a plugin loads (and its token cost) with
+`claude plugin details paean@8x-skills`.
+
+**Manual copy.** Alternatively, copy a skill directory into your skills folder (project
+`.claude/skills/` or global `~/.claude/skills/`):
 
 ```bash
 cp -r 8x-skills/claude-code/paean-publish ~/.claude/skills/
 cp -r 8x-skills/claude-code/paean-remix   ~/.claude/skills/
+cp -r 8x-skills/claude-code/paean-sdk ~/.claude/skills/
 cp -r 8x-skills/claude-code/paean-zero-setup ~/.claude/skills/
 cp -r 8x-skills/claude-code/paean-skills-update ~/.claude/skills/
 ```

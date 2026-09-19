@@ -7,6 +7,29 @@ description: Update the local 8x-skills repository and reinstall Paean skills fo
 
 Update the local `8x-skills` checkout and reinstall the Paean skills into the target agent.
 
+## Claude Code plugin install (no checkout needed)
+
+If the skills were installed as the Claude Code plugin `paean@8x-skills` (check with
+`claude plugin list`), update them through the plugin system and stop here — there is no
+checkout to pull and nothing to copy:
+
+```bash
+claude plugin marketplace update 8x-skills
+claude plugin update paean@8x-skills
+```
+
+Tell the user to restart Claude Code so the updated plugin loads. If the plugin is not
+installed yet and the user wants it, install it instead of copying files:
+
+```bash
+claude plugin marketplace add paean-ai/8x-skills
+claude plugin install paean@8x-skills
+```
+
+(For a fork, substitute the fork's `owner/8x-skills`.) Fall through to the checkout-based
+steps below only when the user maintains a local `8x-skills` clone or copied skill
+directories.
+
 ## Locate the skills repo
 
 Prefer the current repo if it contains `claude-code/`, `codex/`, and `zero/`. Otherwise look
@@ -35,14 +58,16 @@ git pull --ff-only
 
 If `--ff-only` fails, stop and report the conflict/divergence; do not reset or overwrite.
 
-## Reinstall for Claude Code
+## Reinstall for Claude Code (manual copies)
 
-Copy each Claude Code skill directory into the global skills folder:
+Skip this when the plugin is installed (see above) — copied skills would load twice. Otherwise
+copy each Claude Code skill directory into the global skills folder:
 
 ```bash
 mkdir -p ~/.claude/skills
 cp -R claude-code/paean-publish ~/.claude/skills/
 cp -R claude-code/paean-remix ~/.claude/skills/
+cp -R claude-code/paean-sdk ~/.claude/skills/
 cp -R claude-code/paean-zero-setup ~/.claude/skills/
 cp -R claude-code/paean-skills-update ~/.claude/skills/
 ```
@@ -83,6 +108,7 @@ If a project uses `.zero/skills/`, copy there instead or in addition.
 ## Verify
 
 ```bash
+claude plugin validate .
 find claude-code codex zero -maxdepth 2 -name SKILL.md | sort
 node --check codex/paean-publish/scripts/publish.mjs
 node --check codex/paean-remix/scripts/remix.mjs

@@ -1,0 +1,15 @@
+{
+  "name": "paean",
+  "displayName": "Paean Apps Square",
+  "version": "1.0.0",
+  "description": "Build, publish, and remix games on Paean Apps Square (*.clide.app / 8x.gg): publish a static frontend, remix published games with a multi-parent lineage graph, add cloud save and a shared leaderboard via the Paean Web SDK, set up Zero CLI credentials, and keep these skills up to date.",
+  "author": {
+    "name": "Paean AI",
+    "url": "https://clide.app"
+  },
+  "homepage": "https://github.com/paean-ai/8x-skills",
+  "repository": "https://github.com/paean-ai/8x-skills",
+  "license": "MIT",
+  "keywords": ["paean", "clide", "8x", "games", "publish", "remix", "leaderboard", "cloud-save", "zero-cli"],
+  "skills": "./claude-code/"
+}

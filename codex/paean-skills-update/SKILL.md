@@ -43,12 +43,21 @@ If `--ff-only` fails, stop and report the conflict/divergence; do not reset or o
 
 ## Reinstall for Claude Code
 
-Copy each Claude Code skill directory into the global skills folder:
+If Claude Code has the `paean@8x-skills` plugin installed (`claude plugin list`), update it
+through the plugin system instead of copying files:
+
+```bash
+claude plugin marketplace update 8x-skills
+claude plugin update paean@8x-skills
+```
+
+Otherwise copy each Claude Code skill directory into the global skills folder:
 
 ```bash
 mkdir -p ~/.claude/skills
 cp -R claude-code/paean-publish ~/.claude/skills/
 cp -R claude-code/paean-remix ~/.claude/skills/
+cp -R claude-code/paean-sdk ~/.claude/skills/
 cp -R claude-code/paean-zero-setup ~/.claude/skills/
 cp -R claude-code/paean-skills-update ~/.claude/skills/
 ```
