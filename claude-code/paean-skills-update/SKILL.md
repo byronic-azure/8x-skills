@@ -84,6 +84,7 @@ Codex can use this repo in place. Ensure the project `AGENTS.md` points at the c
 - To install Zero CLI or log in to Paean for publishing, follow `8x-skills/codex/paean-zero-setup/SKILL.md`.
 - To publish to Paean Apps Square, follow `8x-skills/codex/paean-publish/SKILL.md`.
 - To remix Paean Apps Square games, follow `8x-skills/codex/paean-remix/SKILL.md`.
+- To add cloud save or a shared leaderboard via the Paean Web SDK, follow `8x-skills/codex/paean-sdk/SKILL.md`.
 ```
 
 If the project keeps a vendored copy of `8x-skills/`, update that copy from this checkout with
