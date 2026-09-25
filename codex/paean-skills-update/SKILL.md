@@ -16,8 +16,8 @@ user asks to update skills, refresh Paean skills, pull the latest skill instruct
 ## Claude Code plugin install (no checkout needed)
 
 If Claude Code has the skills installed as the plugin `paean@8x-skills` (check with
-`claude plugin list`), update them through the plugin system and stop here — there is no
-checkout to pull and nothing to copy, so Git and repository access are not required:
+`claude plugin list`), update them through the plugin system. This refreshes the Claude Code
+side without Git or a checkout:
 
 ```bash
 claude plugin marketplace update 8x-skills
@@ -38,8 +38,10 @@ claude plugin marketplace add paean-ai/8x-skills
 claude plugin install paean@8x-skills
 ```
 
-Fall through to the checkout-based steps below only when the user maintains a local
-`8x-skills` clone or copied skill directories.
+The plugin update covers Claude Code only. If the user also maintains a local `8x-skills`
+checkout — for Codex pointers, Zero CLI copies, or a vendored copy — continue with the
+checkout-based steps below so those stay current, skipping only the Claude Code manual-copy
+section. Stop here only when the plugin is the sole installation.
 
 ## Locate the skills repo
 
