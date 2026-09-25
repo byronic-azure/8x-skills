@@ -13,6 +13,34 @@ user asks to update skills, refresh Paean skills, pull the latest skill instruct
 > project `AGENTS.md` ("To update Paean skills, follow
 > `8x-skills/codex/paean-skills-update/SKILL.md`.") or name the skill in your prompt.
 
+## Claude Code plugin install (no checkout needed)
+
+If Claude Code has the skills installed as the plugin `paean@8x-skills` (check with
+`claude plugin list`), update them through the plugin system and stop here — there is no
+checkout to pull and nothing to copy, so Git and repository access are not required:
+
+```bash
+claude plugin marketplace update 8x-skills
+claude plugin update paean@8x-skills
+```
+
+The update applies to the next Claude Code session; in a session that is already open, run
+`/reload-plugins`. If manual copies from an earlier install still exist
+(`~/.claude/skills/paean-*` or a project's `.claude/skills/paean-*`), they load alongside
+the plugin's namespaced skills — offer to remove them and delete them only with the user's
+approval.
+
+If the plugin is not installed yet and the user wants it, install it instead of copying
+files (for a fork, substitute the fork's `owner/8x-skills`):
+
+```bash
+claude plugin marketplace add paean-ai/8x-skills
+claude plugin install paean@8x-skills
+```
+
+Fall through to the checkout-based steps below only when the user maintains a local
+`8x-skills` clone or copied skill directories.
+
 ## Locate the skills repo
 
 Prefer the current repo if it contains `claude-code/`, `codex/`, and `zero/`. Otherwise look
@@ -41,17 +69,10 @@ git pull --ff-only
 
 If `--ff-only` fails, stop and report the conflict/divergence; do not reset or overwrite.
 
-## Reinstall for Claude Code
+## Reinstall for Claude Code (manual copies)
 
-If Claude Code has the `paean@8x-skills` plugin installed (`claude plugin list`), update it
-through the plugin system instead of copying files:
-
-```bash
-claude plugin marketplace update 8x-skills
-claude plugin update paean@8x-skills
-```
-
-Otherwise copy each Claude Code skill directory into the global skills folder:
+Skip this when the plugin is installed (see above) — copied skills would load twice. Otherwise
+copy each Claude Code skill directory into the global skills folder:
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -99,6 +120,7 @@ If a project uses `.zero/skills/`, copy there instead or in addition.
 ## Verify
 
 ```bash
+claude plugin validate .
 find claude-code codex zero -maxdepth 2 -name SKILL.md | sort
 node --check codex/paean-publish/scripts/publish.mjs
 node --check codex/paean-remix/scripts/remix.mjs

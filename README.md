@@ -111,8 +111,9 @@ claude plugin marketplace add paean-ai/8x-skills
 claude plugin install paean@8x-skills
 ```
 
-Restart Claude Code to load the plugin. All five skills auto-load and are namespaced under the
-plugin, so you can invoke one explicitly as `/paean:paean-publish` (likewise
+Restart Claude Code to load the plugin (or run `/reload-plugins` in an open session). All five
+skills auto-load and are namespaced under the plugin, so you can invoke one explicitly as
+`/paean:paean-publish` (likewise
 `/paean:paean-remix`, `/paean:paean-sdk`, `/paean:paean-zero-setup`,
 `/paean:paean-skills-update`) or just ask ("publish this game to clide.app"). To pull the
 latest skill changes later:
@@ -124,7 +125,8 @@ claude plugin update paean@8x-skills
 
 Installing from a fork works the same way — substitute the fork's `owner/8x-skills` in the
 `marketplace add` command. Check what a plugin loads (and its token cost) with
-`claude plugin details paean@8x-skills`.
+`claude plugin details paean@8x-skills`. If you previously copied skills into
+`~/.claude/skills/`, remove those copies so they do not load alongside the plugin.
 
 **Manual copy.** Alternatively, copy a skill directory into your skills folder (project
 `.claude/skills/` or global `~/.claude/skills/`):

@@ -18,8 +18,13 @@ claude plugin marketplace update 8x-skills
 claude plugin update paean@8x-skills
 ```
 
-Tell the user to restart Claude Code so the updated plugin loads. If the plugin is not
-installed yet and the user wants it, install it instead of copying files:
+The update applies to the next Claude Code session; in a session that is already open, run
+`/reload-plugins`. If manual copies from an earlier install still exist
+(`~/.claude/skills/paean-*` or a project's `.claude/skills/paean-*`), they load alongside
+the plugin's namespaced skills — offer to remove them and delete them only with the user's
+approval.
+
+If the plugin is not installed yet and the user wants it, install it instead of copying files:
 
 ```bash
 claude plugin marketplace add paean-ai/8x-skills
