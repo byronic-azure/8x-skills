@@ -25,10 +25,7 @@ claude plugin update paean@8x-skills
 ```
 
 The update applies to the next Claude Code session; in a session that is already open, run
-`/reload-plugins`. If manual copies from an earlier install still exist
-(`~/.claude/skills/paean-*` or a project's `.claude/skills/paean-*`), they load alongside
-the plugin's namespaced skills — offer to remove them and delete them only with the user's
-approval.
+`/reload-plugins`.
 
 If the plugin is not installed yet and the user wants it, install it instead of copying
 files (for a fork, substitute the fork's `owner/8x-skills`):
@@ -37,6 +34,11 @@ files (for a fork, substitute the fork's `owner/8x-skills`):
 claude plugin marketplace add paean-ai/8x-skills
 claude plugin install paean@8x-skills
 ```
+
+After either the update or a first install, check for stale copies. If manual copies from an earlier install still exist
+(`~/.claude/skills/paean-*` or a project's `.claude/skills/paean-*`), they load alongside
+the plugin's namespaced skills — offer to remove them and delete them only with the user's
+approval.
 
 The plugin update covers Claude Code only. If the user also maintains a local `8x-skills`
 checkout — for Codex pointers, Zero CLI copies, or a vendored copy — continue with the
